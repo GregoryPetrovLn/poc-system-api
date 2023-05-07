@@ -19,3 +19,16 @@ exports.createProduct = asyncHandler(async (req, res, next) => {
     data: product,
   });
 });
+
+//@desc Get single product
+//@route GET /api/product/:id
+//@access Public
+exports.getProduct = asyncHandler(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
+    return next(
+      new ErrorResponse(`Product not found with id of ${req.params.id}`, 400)
+    );
+  }
+  res.status(200).json({ success: true, data: product });
+});
