@@ -1,7 +1,5 @@
 const express = require("express");
-
 const connectDB = require("./config/db");
-
 require("colors");
 
 //Load env files
@@ -9,6 +7,9 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "./config/.env" });
 
 const app = express();
+
+//Body parser
+app.use(express.json());
 
 //DB
 connectDB();
