@@ -10,6 +10,9 @@ dotenv.config({ path: "./config/.env" });
 
 const app = express();
 
+//DB
+connectDB();
+
 //Init server
 const PORT = process.env.PORT || 3300;
 const server = app.listen(PORT, () => {
