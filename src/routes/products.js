@@ -4,6 +4,7 @@ const {
   getListProducts,
   createProduct,
   getProduct,
+  updateProduct,
 } = require("../controllers/products");
 const router = express.Router();
 //Protect route middleware
@@ -15,6 +16,10 @@ router
   .get(advancedResults(Product), getListProducts)
   .post(protect, authorize("admin"), createProduct);
 
-router.route("/:id").get(getProduct);
+router
+  .route("/:id")
+  .get(getProduct)
+  .put(protect, authorize("admin"), updateProduct);
+
 
 module.exports = router;

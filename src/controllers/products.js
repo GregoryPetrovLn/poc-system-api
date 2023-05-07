@@ -1,5 +1,6 @@
 const asyncHandler = require("../middleware/async");
 const Product = require("../models/Product");
+const { ObjectId } = require("mongodb");
 
 //@desc Get all products
 //@route GET /api/products
@@ -30,4 +31,29 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
     );
   }
   res.status(200).json({ success: true, data: product });
+});
+
+//@desc Update product
+//@route PUT /api/products/:id
+//@access Private
+exports.updateProduct = asyncHandler(async (req, res, next) => {
+  let product = await Product.findById(req.params.id);
+  if (!product) {
+    return next(
+      new ErrorResponse(`Product not found with id of ${req.params.id}`, 400)
+    );
+  }
+
+  console.log("req.params.id", req.params.id, product);
+  const _id = ObjectId(req.params.id);
+
+  product = await Product.findOneAndUpdate(_id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(201).json({
+    success: true,
+    data: product,
+  });
 });
