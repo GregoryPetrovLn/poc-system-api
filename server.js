@@ -1,13 +1,19 @@
 const express = require("express");
-const connectDB = require("./config/db");
-const cookieParser = require("cookie-parser");
+const path = require("path");
 const morgan = require("morgan");
+const connectDB = require("./config/db");
+const errorHandler = require("./src/middleware/error");
+const cookieParser = require("cookie-parser");
 const security = require("./src/middleware/security");
 require("colors");
 
 //Load env files
 const dotenv = require("dotenv");
 dotenv.config({ path: "./config/.env" });
+
+//Import routes
+const products = require("./src/routes/products");
+const auth = require("./src/routes/auth");
 
 const app = express();
 
@@ -16,9 +22,6 @@ app.use(express.json());
 
 //Cookie parser
 app.use(cookieParser());
-
-//Import routes
-const products = require("./src/routes/products");
 
 //DB
 connectDB();
@@ -33,6 +36,10 @@ security(app);
 
 //Mount routes
 app.use("/api/products", products);
+app.use("/api/auth", auth);
+
+//Middleware error hanlder
+app.use(errorHandler);
 
 //Init server
 const PORT = process.env.PORT || 3300;
