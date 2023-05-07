@@ -5,6 +5,7 @@ const {
   createProduct,
   getProduct,
   updateProduct,
+  deleteProduct,
 } = require("../controllers/products");
 const router = express.Router();
 //Protect route middleware
@@ -19,7 +20,8 @@ router
 router
   .route("/:id")
   .get(getProduct)
-  .put(protect, authorize("admin"), updateProduct);
+  .put(protect, authorize("admin"), updateProduct)
+  .delete(protect, authorize("admin"), deleteProduct);
 
 
 module.exports = router;
