@@ -44,7 +44,6 @@ exports.updateProduct = asyncHandler(async (req, res, next) => {
     );
   }
 
-  console.log("req.params.id", req.params.id, product);
   const _id = ObjectId(req.params.id);
 
   product = await Product.findOneAndUpdate(_id, req.body, {
