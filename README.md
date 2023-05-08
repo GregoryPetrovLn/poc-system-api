@@ -32,6 +32,6 @@ Add .env file with next element
 - Clone the repository and install the required dependencies.
 - Set up the database connection and configure the API settings.
 - Run the API server and verify the successful connection.
-- [Explore the API documentation to understand available endpoints and their functionalities.]()
+- [Explore the API documentation to understand available endpoints and their functionalities.](https://www.postman.com/red-escape-142478/workspace/poc/request/13745414-87a9bd69-5552-4e7f-85b5-41b423d20531)
 - Start making requests to authenticate users and manipulate products.
 - This API provides a solid foundation for building a robust e-commerce platform or any application that requires user authentication and product management.
